@@ -32,7 +32,7 @@ class CombatUnit:
 
     def special_attack(self, other):
         if d(20) + self.offence > d(20) + other.defense:
-            other.health -= self.damage()
+            other.health -= self.damage() + self.dam_dice
 
 
 class Barbarian(CombatUnit):
@@ -220,7 +220,7 @@ def campaign():
             "Defender", "DefenderLevel",
             "Winner"
         ))
-        for _ in range(1000000):
+        for _ in range(100000):
             attacker = random_class(dice(1, 20))
             defender = random_class(dice(1, 20))
             file.writerow((

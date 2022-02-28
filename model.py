@@ -2,7 +2,7 @@ from functools import reduce
 from operator import mul
 
 import joblib
-import pandas as pd
+import pandas
 from sklearn.model_selection import RandomizedSearchCV
 from sklearn.ensemble import RandomForestClassifier
 
@@ -10,7 +10,7 @@ from encoder import encodes
 
 
 def get_data():
-    combat_logs = pd.read_csv("combat_log.csv")
+    combat_logs = pandas.read_csv("combat_log.csv")
     target = combat_logs['Winner']
     features = combat_logs.drop(columns=['Winner'])
     features["Attacker"] = features["Attacker"].apply(encodes)
@@ -44,7 +44,7 @@ def make_model():
     features, target = get_data()
     model = RandomForestClassifier(
         criterion="entropy",
-        max_depth=12,
+        max_depth=11,
         n_estimators=299,
         n_jobs=8,
         random_state=42,
